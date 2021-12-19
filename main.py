@@ -7,7 +7,7 @@ app = Flask(__name__, static_folder="static", static_url_path="")
 CORS(app)
 
 
-@app.route("/all")
+@app.route("/")
 def all():
     all_midi = glob.glob("./static/midi/*")
     midi_files = [midi.replace("./static/midi/", "") for midi in all_midi]
