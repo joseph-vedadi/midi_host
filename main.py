@@ -9,14 +9,16 @@ CORS(app)
 
 @app.route("/")
 def all():
-    all_midi = glob.glob("./static/midi/*")
-    midi_files = [midi.replace("./static/midi/", "") for midi in all_midi]
-    return jsonify(midi_files)
+    info = {}
+    for folder_name in ['midi', 'audio']:
+        all_files = glob.glob(f"./static/{folder_name}/*")
+        info[folder_name] = [f.replace("./static/", "") for f in all_files]
+    return jsonify(info)
 
 
 @app.route("/<path:path>")
 def midi(path):
-    return send_from_directory("./static/midi/", path)
+    return send_from_directory("./static/", path)
 
 
 if __name__ == "__main__":
